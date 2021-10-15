@@ -1,12 +1,19 @@
 # Scripts útiles de gestión de CMS
 
-Este proyecto contiene scripts bash útiles para administrar usuarios y concursos de una instancia de CMS.
+Este proyecto contiene scripts bash útiles para administrar usuarios y concursos de una instancia de CMS. Puede ser cómodo que estos scripts sean instalados en un directorio que esté en el PATH (como `/usr/local/bin`).
 
 La mayoría de ellos trabajan con ficheros de entrada en formato JSON que contiene, por ejemplo, la lista de participantes o de regiones. La forma más fácil de conseguir esos JSON es utilizar una hoja de cálculo a modo de base de datos que, utilizando fórmulas, genere el JSON.
 
 Un ejemplo puede verse [aquí](https://docs.google.com/spreadsheets/d/1DNZ4kaNdbEPauDCkgZ28x01FDKPuLsbMpns1tRb0k-o/) aunque las fórmulas que generan el JSON no aguantarían nombres extraños (con comillas, por ejemplo).
 
-Puede ser cómodo que estos scripts sean instalados en un directorio que esté en el PATH (como /usr/local/bin).
+Típicamente, con la ayuda de una hoja de cálculo como la anterior, se consigue una "base de datos" en disco para ser utilizada por los distintos scripts. En el directorio podríamos tener:
+
+1. Un fichero `teams.json` con la información de las regiones (o "equipos olímpicos").
+1. Un fichero `users.json` con la información de los usuarios. Incluye también los datos de acceso (usuario y contraseña), así como el equipo al que pertenecen.
+1. Un directorio `flags` con las banderas de cada región (o los logos de los centros educativos, etc.). Por cada región hay un fichero con el mismo nombre que el campo `id` del JSON (y con extensión .jpg o .png).
+1. Un directorio `faces` con las fotos de los participantes. Los nombres en este caso deberán coincidir con el campo `user` del JSON. El aspect ratio de esas imágenes debe ser 2:3 (dos de ancho por tres de alto).
+
+Las imágenes anteriores serán utilizadas en el momento de configurar el ranking de CMS.
 
 ## `registerTeams.sh`
 
@@ -14,7 +21,7 @@ Puede ser cómodo que estos scripts sean instalados en un directorio que esté e
 
 **OJO**: el significado de *equipo* aquí es distinto del que se utiliza en competiciones universitarias. Aquí utilizamos el término de equipo en el sentido "equipo olímpico español" pero cada equipo tiene luego asociados los participantes/usuarios individuales que compiten. En el caso de competiciones universitarias en donde la participación suele hacerse en grupo, un equipo equivale a esa agrupación que participa como una unidad indivisible.
 
-El script recibe como parámetro el JSON con la información de los equipos. Se puede ejecutar desde un directorio que contenga la carpeta `flags`. En ese caso se buscarán las banderas/logos de cada equipo en esa carpeta. Se espera que nombre del fichero con el logo de un equipo coincida con el campo `id` del JSON.
+El script recibe como parámetro el JSON con la información de los equipos.
 
 ```bash
 # Ejemplo de uso
@@ -30,7 +37,6 @@ $ registerTeams.sh teams.json
 Equivalente al anterior, útil para registrar participantes en CMS.
 
 El script recibe como parámetro el JSON con la información de cada participante, aunque el equipo al que pertenece *es ignorado* pues la asociación equipo-participante en CMS está vinculada a la existencia de un concurso.
-Se puede ejecutar desde un directorio que contenga la carpeta `faces`. En ese caso se buscarán las fotos de cada participante en esa carpeta. Se espera que nombre del fichero con el logo de un equipo coincida con el campo `user` del JSON.
 
 ```bash
 # Ejemplo de uso
