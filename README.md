@@ -12,8 +12,10 @@ Típicamente, con la ayuda de una hoja de cálculo como la anterior, se consigue
 1. Un fichero `users.json` con la información de los usuarios. Incluye también los datos de acceso (usuario y contraseña), así como el equipo al que pertenecen.
 1. Un directorio `flags` con las banderas de cada región (o los logos de los centros educativos, etc.). Por cada región hay un fichero con el mismo nombre que el campo `id` del JSON (y con extensión .jpg o .png).
 1. Un directorio `faces` con las fotos de los participantes. Los nombres en este caso deberán coincidir con el campo `user` del JSON. El aspect ratio de esas imágenes debe ser 2:3 (dos de ancho por tres de alto).
+1. Un fichero logo.{png,jpg} con el logo del concurso.
 
-Las imágenes anteriores serán utilizadas en el momento de configurar el ranking de CMS.
+Las imágenes anteriores serán utilizadas en el momento de configurar el ranking de CMS
+(script `addRankingImages.sh`).
 
 ## `registerTeams.sh`
 
@@ -26,9 +28,7 @@ El script recibe como parámetro el JSON con la información de los equipos.
 ```bash
 # Ejemplo de uso
 $ ls
-faces flags teams.json users.json
-$ ls flags/
-GRI.png  HOG.jpg  SLY.png  VIL.png
+faces flags logo.png teams.json users.json
 $ registerTeams.sh teams.json
 ```
 
@@ -41,9 +41,7 @@ El script recibe como parámetro el JSON con la información de cada participant
 ```bash
 # Ejemplo de uso
 $ ls
-faces flags teams.json users.json
-$ ls faces/
-draco.png  dumbledore.jpg  ginny.png  hagrid.png  harry.jpg  hermione.png  lucius.png  mcgonagall.jpg  ojoloco.png  ron.jpg  snape.png  voldemort.png
+faces flags logo.png teams.json users.json
 $ registerTeams.sh teams.json
 ```
 
@@ -92,3 +90,25 @@ Los parámetros son:
 1. Id numérico del concurso en el que hacer los envíos (se ve, por ejemplo, en la URL de la página de administración de CMS donde se muestran sus propiedades).
 1. Directorio raíz con el código fuente de los envíos. Los ficheros de código referenciados en el JSON son relativos a ese directorio
 1. Hora de inicio del concurso. El script sumará a esa hora el tiempo de concurso especificado en el JSON.
+
+## `addRankingImages.sh`
+
+Permite añadir cómodamente al directorio de datos del servidor de rankings (RWS)
+las imágenes asociadas al concurso, en concreto su logo, banderas de los equipos
+y fotos de los participantes.
+
+Recibe como primer parámetro el directorio destino (directorio de datos del RWS)
+y como segundo parámetro (opcional) el directorio con las imágenes siguiendo
+la estructura explicada más arriba: fichero `logo.{png,jpg}` y directorios `flags`
+y `faces`.
+
+```bash
+# Ejemplo de uso
+$ ls
+faces  flags  logo.png  teams.json  users.json
+$ ls flags/
+GRI.png  HOG.jpg  SLY.png  VIL.png
+$ ls faces/
+draco.png  dumbledore.jpg  ginny.png  hagrid.png  harry.jpg  hermione.png  lucius.png  mcgonagall.jpg  ojoloco.png  ron.jpg  snape.png  voldemort.png
+$ addRankingImages.sh /var/local/lib/cms/ranking/
+```
