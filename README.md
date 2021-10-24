@@ -10,12 +10,13 @@ Típicamente, con la ayuda de una hoja de cálculo como la anterior, se consigue
 
 1. Un fichero `teams.json` con la información de las regiones (o "equipos olímpicos").
 1. Un fichero `users.json` con la información de los usuarios. Incluye también los datos de acceso (usuario y contraseña), así como el equipo al que pertenecen.
-1. Un directorio `flags` con las banderas de cada región (o los logos de los centros educativos, etc.). Por cada región hay un fichero con el mismo nombre que el campo `id` del JSON (y con extensión .jpg o .png).
+1. Un directorio `flags` con las banderas de cada región (o los logos de los centros educativos, etc.). Por cada región hay un fichero con el mismo nombre que el campo `id` del JSON.
 1. Un directorio `faces` con las fotos de los participantes. Los nombres en este caso deberán coincidir con el campo `user` del JSON. El aspect ratio de esas imágenes debe ser 2:3 (dos de ancho por tres de alto).
-1. Un fichero logo.{png,jpg} con el logo del concurso.
+1. Un fichero llamado logo (y la extensión apropiada) con el logo del concurso (tamaño recomendado, 200x160).
 
 Las imágenes anteriores serán utilizadas en el momento de configurar el ranking de CMS
-(script `addRankingImages.sh`).
+(script `addRankingImages.sh`) y se soportan extensiones .png, .jpg, .gif y
+.bmp.
 
 ## `registerTeams.sh`
 
@@ -99,7 +100,7 @@ y fotos de los participantes.
 
 Recibe como primer parámetro el directorio destino (directorio de datos del RWS)
 y como segundo parámetro (opcional) el directorio con las imágenes siguiendo
-la estructura explicada más arriba: fichero `logo.{png,jpg}` y directorios `flags`
+la estructura explicada más arriba: fichero con el logo y directorios `flags`
 y `faces`.
 
 ```bash
