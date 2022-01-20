@@ -43,7 +43,7 @@ El script recibe como parámetro el JSON con la información de cada participant
 # Ejemplo de uso
 $ ls
 faces flags logo.png teams.json users.json
-$ registerTeams.sh teams.json
+$ registerUsers.sh teams.json
 ```
 
 ## `addContest.sh`
