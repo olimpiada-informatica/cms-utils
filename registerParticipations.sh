@@ -37,7 +37,7 @@ registerParticipation () {
         fi
 
         echo $(_getField nombre) - $(_getField apellidos) - $hidden
-        cmsAddParticipation -c $1 -$team $hidden "$(_getField user)"
+        cmsAddParticipation -c $1 $team $hidden "$(_getField user)"
     done
 }
 
