@@ -28,6 +28,9 @@ addContest () {
         sed -i 's/stop: [0-9]*/stop: '$end'/' contest.yaml
     fi
 
+    # En CMS 1.4 cmsImportContest requiere "users:" en el yaml
+    grep -qe '^users:' contest.yaml || echo -e '\nusers: []' >> contest.yaml
+
     # Compilamos los posibles manager's/checker's que pueda haber en los
     # problemas interactivos
     for m in $(find \( -name manager.cpp -o -name checker.cpp \)); do
