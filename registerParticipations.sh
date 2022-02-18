@@ -30,13 +30,14 @@ registerParticipation () {
         fi
 
         local team="$(_getField team)"
+	[ "$team" == "null" ] && team=""
         if [ -n "$team" ]; then
            team="-t $team"
         else
            team=""
         fi
 
-        echo $(_getField nombre) - $(_getField apellidos) - $hidden
+        echo $(_getField nombre) - $(_getField apellidos) - $team - $hidden
         cmsAddParticipation -c $1 $team $hidden "$(_getField user)"
     done
 }
