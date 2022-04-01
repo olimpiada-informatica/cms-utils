@@ -29,21 +29,21 @@ addRankingImages () {
     if compgen -G "$srcDir/logo.*" > /dev/null; then
 	    cp "$srcDir"/logo.* "$1"
 	else
-		echo Logo no encontrado
+		echo Aviso: Logo no encontrado
 	fi
     
     mkdir -p "$1/faces"
 	if compgen -G "$srcDir/faces/*" > /dev/null; then
 		cp "$srcDir/faces"/* "$1/faces"
     else
-		echo Fotos de equipos no encontradas
+		echo Aviso: Fotos de participantes no encontradas
 	fi
 
     mkdir -p "$1/flags"
 	if compgen -G "$srcDir/flags/*" > /dev/null; then
 		cp "$srcDir/flags"/* "$1/flags"
 	else
-		echo Banderas no encontradas
+		echo Aviso: Banderas no encontradas
 	fi
 }
 
